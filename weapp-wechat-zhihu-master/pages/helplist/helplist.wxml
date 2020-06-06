@@ -1,0 +1,15 @@
+<!--pages/helplist/helplist.wxml-->
+<text>pages/helplist/helplist.wxml</text>
+
+<view class="page-section-spacing">
+      <scroll-view scroll-y="true"  bindscrolltoupper="upper" bindscrolltolower="lower" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+      <view id="demo1" class="scroll-view-item">11111</view>
+      <view id="demo2" class="scroll-view-item">22222</view>
+      <view id="demo3" class="scroll-view-item">33333</view>
+      <view id="demo3" class="scroll-view-item">33333</view>
+      <view id="demo3" class="scroll-view-item">33333</view>
+      <view id="demo3" class="scroll-view-item">33333</view>
+      <view id="demo3" class="scroll-view-item">33333</view>
+      <view id="demo3" class="scroll-view-item">33333</view>
+    </scroll-view>
+</view>

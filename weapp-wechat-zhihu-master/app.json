@@ -1,0 +1,56 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/chat/chat",
+    "pages/more/more",
+    "pages/answer/answer",
+    "pages/question/question",
+    "pages/writer/writer",
+    "pages/test/test",
+    "pages/show/show",
+    "pages/helplist/helplist",
+    "pages/reviewWriter/reviewWriter",
+    "pages/Myarticlelist/Myarticlelist",
+    "pages/me/me",
+    "pages/mechange/mechange"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#00BCD4",
+    "navigationBarTitleText": "心灵港湾",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#626567",
+    "selectedColor": "#00BCD4",
+    "backgroundColor": "#FBFBFB",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "主页",
+        "iconPath": "images/index.png",
+        "selectedIconPath": "images/index_focus.png"
+      },
+      {
+        "pagePath": "pages/chat/chat",
+        "text": "私信",
+        "iconPath": "images/chat.png",
+        "selectedIconPath": "images/chat_focus.png"
+      },
+      {
+        "pagePath": "pages/more/more",
+        "text": "我",
+        "iconPath": "images/burger.png",
+        "selectedIconPath": "images/burger_focus.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true,
+  "sitemapLocation": "sitemap.json"
+}

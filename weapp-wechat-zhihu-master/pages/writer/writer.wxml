@@ -1,0 +1,42 @@
+<!--pages/writer/writer.wxml-->
+<view class="input-block">
+  <view class='input-block'>
+    <textarea bindinput="input_title" placeholder="标题" placeholder-style="font-size:35rpx" auto-height="true" value="{{title}}"></textarea>
+  </view>
+</view>
+<view class="input-block1">
+  <view class='input-area'>
+    <textarea bindinput="input_body" placeholder="写下你的烦恼" placeholder-style="font-size:35rpx" auto-height="true" value="{{body}}"></textarea>
+  </view>
+</view>
+
+<view wx:if="{{article_id==''}}">
+  <button bindtap="upload_open">公开上传</button>
+  <button bindtap="upload_privacy" >私密上传</button>
+</view>
+<view wx:else>
+  <button bindtap="article_update_open">编辑后公开</button>
+  <button bindtap="article_update_privacy">编辑后私密</button>
+  
+</view>
+
+
+<mp-dialog title="" 
+    show="{{showOneButtonDialog1}}" 
+    bindbuttontap="back" 
+    buttons="{{oneButton}}">
+  <text>上传成功</text>
+</mp-dialog>
+
+<mp-dialog title="" 
+    show="{{showOneButtonDialog2}}" 
+    bindbuttontap="back" 
+    buttons="{{oneButton}}">
+  <text>表单有误</text>
+</mp-dialog>
+<mp-dialog title="" 
+    show="{{showOneButtonDialog3}}" 
+    bindbuttontap="back" 
+    buttons="{{oneButton}}">
+  <text>编辑完成</text>
+</mp-dialog>

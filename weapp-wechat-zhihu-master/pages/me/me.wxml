@@ -1,0 +1,8 @@
+<!--pages/me/me.wxml-->
+<view>昵称：{{userinfo.name}}</view>
+<view>性别：{{userinfo.sex}}</view>
+<view>工作：{{userinfo.job}}</view>
+<view>年龄：{{userinfo.age}}</view>
+<view>爱好：{{userinfo.like}}</view>
+<view>权限：{{userinfo.power}}</view>
+<button bindtap="change">修改</button>

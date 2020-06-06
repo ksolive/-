@@ -1,5 +1,7 @@
 
 
+
+
 # 期末大作业
 
 这是吴逸豪2018302180060、翁斌2018302180061的数据库期末大作业后端代码
@@ -11,7 +13,7 @@
 1. 用户注册登录，用户信息上传，包含姓名、性别、工作、年龄、兴趣
 2. 用户权限控制，在power字段储存，包括 0游客、1注册用户、2高级用户、3管理员、4开发者，权限依次扩大
 3. 文章操作，包括创建、修改、删除基本操作，包含创建、修改时间记录，**并特色实现隐私发布功能**
-4. 评论操作，包括创建、修改、删除、点赞操作，包含自动更新的创建、最近修改时间记录
+4. 评论操作，包括创建、修改、删除、**点赞操作**，包含**自动更新的创建、最近修改时间记录**
 
 具体实现见Mark 0.1部分
 
@@ -251,7 +253,7 @@ Mark 0.1 为功能实现版，所有代码皆为最简单版本，因此存在�
 
    
 
-3. 服务端明文储存所有信息，对用户隐私无保护
+3. 服务端明文储存所有信息，对用户隐私无保护，被拖库时隐私泄露严重
 
 
 
@@ -259,8 +261,76 @@ Mark 0.1 为功能实现版，所有代码皆为最简单版本，因此存在�
 
 针对Mark 0.1的安全分析，我们对后端代码进行了优化，主要有：
 
-1. 
+1. 为了解决控制信号被篡改的问题，我们加入了简单的cookie：
 
-2. 
-3.  
-4. 
+   1. 在user表中加入updated字段储存最后登录时间，登录时自动更新；加入cookie字段储存cookie
+   2. 当用户注册或登录时，后端取得updated属性和id属性，连接后进行MD5加密作为cookie，储存进cookie字段并发还前端储存
+   3. 前端在其他请求中带上cookie，后端收到cookie与数据库中储存的进行对比，相同才会进行接下来的操作
+   4. 为了方便取得id-cookie对并避免所以功能都可以访问user表，创建cookie-view仅显示id-cookie两个属性
+
+2. 为了解决sql注入的问题，我们采取了两种方法：
+
+   1. 关键字匹配：使用正则表达式筛出危险字符，这种方法不适合大段文字，因此我们仅在登录界面使用。规定用户名和密码只能由字母数字和下划线组成，并使用正则表达式匹配，当匹配结果与原字符串完全相同时才继续流程
+
+   2. 预编译sql语句：不使用字符串连接，而使用python中的sql预编译功能，确定某些字符串仅作为条件，可以从根本上避免输入作为独立语句执行，如图：
+
+      ![1590654052040](C:\Users\wyh10\AppData\Roaming\Typora\typora-user-images\1590654052040.png)
+
+3. 为了防止出现新型sql跨表查询攻击，我们通过创建不同用户进行单独授权，限定了每个功能的权限。以登录系统为例，共创建5个用户，对应5种功能：
+
+   ```mysql
+   CREATE USER 'login' IDENTIFIED BY 'login_password'; 
+   CREATE USER 'signup' IDENTIFIED BY 'signup_password'; 
+   CREATE USER 'userinfo' IDENTIFIED BY 'userinfo_password'; 
+   CREATE USER 'userchange' IDENTIFIED BY 'userchange_password'; 
+   CREATE USER 'userpowerup' IDENTIFIED BY 'userpowerup'; 
+   
+   GRANT select,update ON auther_user TO 'login';
+   GRANT insert ON auther_user TO 'signup';
+   GRANT select ON auther_user TO 'userinfo';
+   GRANT update ON auther_user TO 'userchange';
+   GRANT update ON auther_user TO 'userpowerup';
+   ```
+
+   同时还可以创建不同的角色和视图对不同功能的权限做更加详细的限定，但我们的项目功能简单，在其他安全性措施下已经没有必要进行这些限定。
+
+4. 为了解决遭到拖库时密码隐私的泄露问题，我们采用加盐加密的方法：
+
+   1. 用户注册时，后端自动生成随机字符串称为salt，salt与密码运算后进行MD5加密，将加密后密文连同salt储存进数据库
+   2. 用户登录时，后端从数据库中取得salt和密文，对用户输入的密码进行同样运算得到密文，两个密文进行对比，只有相同时验证通过
+   3. 通过这样的方法，可以避免拖库时密码明文泄露，同时也可以防止只进行单纯MD5加密被使用彩虹表破解的情况
+
+5. 对于需要明文查看的其他隐私，如电话等，需要使用密钥进行可逆加密，并将密钥放在单独文件中防止拖库时一并泄露，这样的操作和数据库关系不大，同时不好演示，我们没有实现
+
+
+
+# 具体代码及使用方法
+
+* 前端代码放在front文件夹中，是小程序工程文件，需要使用微信小程序开发工具导入并进行测试。请注意如不能正确连接本地服务器，大概率是要设置忽略HTTPS，如图：
+
+  其他问题还请联系团队成员
+
+  ![1590655561352](C:\Users\wyh10\AppData\Roaming\Typora\typora-user-images\1590655561352.png)
+
+* 后端代码放在wx文件夹中，是django工程文件，需要 python3.6.x 和 django2.x 环境运行，直接在wx/目录下运行命令：
+
+  ```shell
+  python manage.py runserver
+  ```
+
+  即可开启服务器。
+
+  有其他问题请联系团队成员。
+
+* 数据库代码为DB.sql，是一个sql清单文件，可以直接在Mysql8环境下运行，创建所有需要的数据库结构
+
+  数据库ER图如下：
+
+  ![1590657853500](C:\Users\wyh10\AppData\Roaming\Typora\typora-user-images\1590657853500.png)
+
+
+
+# 演示视频请见：
+
+
+

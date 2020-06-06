@@ -1,0 +1,22 @@
+<!--pages/writer/writer.wxml-->
+
+<view class="input-block">
+  <view class='input-area'>
+    <textarea bindinput="input" placeholder="写下你的烦恼" placeholder-style="font-size:35rpx" auto-height="true"></textarea>
+  </view>
+<!--
+</view>
+<view class="contener-button">
+  <view class="container" style="position:relative;top:200rpx;">
+    
+    <view class="divLine"></view>
+  </view>
+  <view style="display: flex;flex-direction: row;justify-content: space-around;flex-wrap: wrap;position:relative;top:230rpx;" class="buttons">
+    <button bindtap="open" plain="true" style="width:40%">公开</button>
+    <button bindtap="unopen" plain="true" style="width:40%">不公开</button>
+  </view>
+  -->
+</view>
+
+<button bindtap="back">返回</button>
+<button bindtap="upload">提交</button>

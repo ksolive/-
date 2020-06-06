@@ -1,0 +1,24 @@
+/* pages/writer/writer.wxss */
+.input-block {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+}
+.divLine{
+ background: #E0E3DA;
+ width: 80%;
+ height: 2px;
+ top: 200rpx;
+}
+
+.contener-button {
+  bottom: 200rpx;
+  
+}
+
+#1{
+  width: 100%;
+}
+#2{
+  width: 100%;
+}

@@ -1,0 +1,10 @@
+<!--pages/show/show.wxml-->
+<text>pages/show/show.wxml</text>
+<view>
+  <view>你好</view>
+  <view>HELLO</view>
+</view>
+
+<input placeholder="请输入"></input>
+
+<button>按钮</button>

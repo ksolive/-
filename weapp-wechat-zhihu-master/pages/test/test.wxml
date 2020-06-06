@@ -1,0 +1,22 @@
+
+<text>请输入用户名:{{user}}</text>
+<input value="{{user}}" placeholder="username" bindinput="user"></input>
+<text>请输入密码:{{pass}}</text>
+<input value="{{pass}}" placeholder="password" bindinput="pass"></input>
+<button bindtap="login">登录/注册</button>
+<input value="{{id}}" placeholder="userid" bindinput="id"></input>
+<text>点击以登出</text>
+<button bindtap="logout">logout</button>
+<mp-dialog title="" 
+    show="{{showOneButtonDialog}}" 
+    bindbuttontap="tapDialogButton" 
+    buttons="{{oneButton}}">
+  <text>{{logininf}}</text>
+</mp-dialog>
+<mp-dialog title="" 
+    show="{{dialogShow}}" 
+    bindbuttontap="tapDialogButton" 
+    buttons="{{buttons}}">
+  <view>{{logininf}}</view>
+</mp-dialog>
+<button bindtap="tran">write</button>

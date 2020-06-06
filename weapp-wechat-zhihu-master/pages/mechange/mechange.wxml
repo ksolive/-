@@ -1,0 +1,8 @@
+<!--pages/mechange/mechange.wxml-->
+<text>pages/mechange/mechange.wxml</text>
+<input placeholder="昵称" bindinput="name">{{userinfo.name}}</input>
+<input placeholder="性别" bindinput="sex">{{userinfo.sex}}</input>
+<input placeholder="年龄" bindinput="age">{{userinfo.age}}</input>
+<input placeholder="爱好" bindinput="hobit">{{userinfo.hobit}}</input>
+<input placeholder="密码" bindinput="password">{{userinfo.password}}</input>
+<button  size="small" style="width:60vw">提交修改</button>

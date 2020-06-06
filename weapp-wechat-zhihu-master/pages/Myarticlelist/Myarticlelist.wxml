@@ -1,0 +1,44 @@
+<text>Myarticle</text>
+<scroll-view scroll-y="true" class="container" bindscrolltoupper="refresh" upper-threshold="10" lower-threshold="5" bindscrolltolower="refresh"  scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+    <block wx:for="{{result}}" wx:for-index="idx" wx:for-item="item" data-idx="{{idx}}">
+        <view class="feed-item">
+            <view class="feed-source">
+                <a class="">
+                    <text>{{item.title}}{{item.title}}</text>
+                </a>
+            </view>
+            <view class="feed-content">
+                <view class="question" data-id="{{item.id}}" bindtap="bindQueTap">
+                    <a class="question-link">
+                        <text>{{item.body}}</text>
+                    </a>
+                </view>
+                <view class="answer-body">
+                    <view bindtap="bindItemTap">
+                        <text class="answer-txt" aid="{{answer_id}}">{{item.title}}</text>
+                    </view>
+                    <view class="answer-actions" bindtap="bindItemTap">
+                        <view class="like dot">
+                            <a>{{item.title}} 赞同 </a>
+                        </view>
+                        <view class="comments dot">
+                            <a>{{item.title}} 评论 </a>
+                        </view>
+                        <view bindtap="showdialog1" data-id="{{item.id}}">
+                            <a>删除</a>
+                        </view>
+                        <view bindtap="article_update" data-id="{{item.id}}">
+                            <a>编辑文章</a>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+</scroll-view>
+<mp-dialog title="" 
+    show="{{showButtonDialog1}}" 
+    bindbuttontap="trigger" 
+    buttons="{{buttons}}">
+    <text>确定删除吗？</text>
+  </mp-dialog>
